@@ -31,7 +31,7 @@ if ($sql) {
         echo("<script type='text/javascript'>
             Swal.fire({
                 icon: 'error',
-                title: 'Error al insertar el usuario',
+                title: 'Error al insertar el libro',
                 showConfirmButton: false,
                 timer: 1500
             }).then(() => {

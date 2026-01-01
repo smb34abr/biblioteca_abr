@@ -3,11 +3,10 @@
   data-pc-theme="light">
 
 <!-- [Head] start -->
-
 <head>
   <?php
-    include_once('include/head.php');
-    include_once('config/conexion.php');
+  include_once "include/head.php";
+  include_once "config/conexion.php";
   ?>
 </head>
 <!-- [Head] end -->
@@ -27,7 +26,7 @@
   <!-- [ Pre-loader ] End -->
 
   <!-- [ Sidebar Menu ] start -->
-  <?php require_once('include/menu.php'); ?>
+  <?php require_once "include/menu.php"; ?>
   <!-- [ Sidebar Menu ] end -->
 
   <!-- [ Header Topbar ] start -->
@@ -288,8 +287,6 @@
   </header>
   <!-- [ Header ] end -->
 
-
-
   <!-- [ Main Content ] start -->
   <div class="pc-container">
     <div class="pc-content">
@@ -297,14 +294,12 @@
       <div class="page-header">
         <div class="page-block">
           <div class="page-header-title">
-           <!--  <a href="">
-              <h4 class="mb-0 font-medium mb-3" title="Nuevo libro"> <i data-feather="plus"></i></h4>
-            </a> -->
+           
           </div>
           <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="../dashboard/index.html">Incio</a></li>
+            <li class="breadcrumb-item"><a href="index.php">Incio</a></li>
             <!-- <li class="breadcrumb-item"><a href="javascript: void(0)">Other</a></li> -->
-            <li class="breadcrumb-item" aria-current="page">Relación de usuarios</li>
+            <li class="breadcrumb-item" aria-current="page">Libros prestados</li>
           </ul>
         </div>
       </div>
@@ -318,10 +313,9 @@
         <div class="col-span-12">
           <div class="card">
             <div class="card-header flex justify-between items-center">
-              <h3>Relación de usuarios
-              </h3>
-              <a href="form_usuario.php" class="btn bg-primary-700 me-2">
-                <h4 class="mb-0 font-medium" title="Nuevo usuario" style="color: white;">Nuevo </h4>
+              <h3>Relación de Libros prestados</h3>
+              <a href="form_libros.php" class="btn bg-primary-700 me-2">
+                <h4 class="mb-0 font-medium" title="Nuevo libro" style="color: white;">Nuevo</h4>
               </a>
             </div>
             <div class="card-body">
@@ -329,45 +323,52 @@
                 <thead>
                   <tr>
                     <th>id</th>
-                    <th>Nombre y Apellido</th>
-                    <th>Fecha de nacimiento</th>
-                    <th>Email</th>
-                    <th>Telefono</th>
-                    <th>Dirección</th>                    
+                    <th>Libro</th>
+                    <th>Usuarios</th>
+                    <th>Fecha prestamo</th>
+                    <th>Fecha devolución</th>
+                    <th>Fecha devolucion prevista</th>
+                    <th>Fecha devolucion real</th>                                                      
                     <th>Acciones</th>
+                  </tr>
                 </thead>
                 <tbody>
 
-                <?php
-					//require_once('config/conexion.php');
+                  <?php
+                 
+                  $sql = $conexion->query("
+                    SELECT * FROM prestamos
+                    INNER JOIN libros ON prestamos.id_libro = libros.id_libro
+                    INNER JOIN usuarios ON prestamos.id_usuario = usuarios.id_usuario");
 
-					$sql = $conexion->query("SELECT * FROM usuarios
-						            /*INNER JOIN escritores ON libros.id_escritor = escritores.id_escritor
-						            INNER JOIN editorial ON libros.id_editorial  = editorial.id_editorial*/
-					");
+                  while ($resultado = $sql->fetch_assoc()) { ?>
 
-					 while ($resultado =  $sql->fetch_assoc()){
-				?>                    
                   <tr>
-                    <td><?php echo $resultado['id_usuario']; ?></td>
-                    <td><?php echo $resultado['nombre'].' '.$resultado['apellido']; ?></td>
-                    <td><?php echo date("d-m-Y", strtotime($resultado['fecha_nacimiento'])); ?></td>
-                    <td><?php echo $resultado['email'] ?></td>
-                    <td><?php echo $resultado['telefono'] ?></td>
-                    <td><?php echo $resultado['direccion'] ?></td>                    
+                    <td><?php echo $resultado["id_prestamo"]; ?></td>
+                    <td><?php echo $resultado["titulo"]; ?></td>
+                    <td><?php echo $resultado["nombre"]. " ". $resultado["apellido"]; ?></td>
+                    <td><?php echo  date("d-m-Y", strtotime($resultado["fecha_prestamo"])); ?></td>
+                    <td><?php echo date("d-m-Y", strtotime($resultado["fecha_devolucion_prevista"])); ?></td>
+                    <td><?php echo date("d-m-Y", strtotime($resultado["fecha_devolucion_prevista"])); ?></td>
+                    <td><?php echo date("d-m-Y", strtotime($resultado["fecha_devolucion_real"])); ?></td>                    
+                    
                     <td>
-                      <a href="editar_usuario.php?id_usuario=<?php echo $resultado['id_usuario'] ?>"
-                        class="btn btn-warning"><i class="fa-solid fa-pencil"></i></a>
-                      <a href="delete_usuario.php?id_usuario=<?php echo $resultado['id_usuario'] ?>"
-                        class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
-                    </td>                    
+                      <a href="editar_libro.php?id_libro=<?php echo $resultado['id_libro'] ?>" class="btn btn-warning">
+                        <i class="fa-solid fa-pencil"></i>
+                      </a>
+                      <a href="delete_libros.php?id_libro=<?php echo $resultado['id_libro'] ?>" class="btn btn-danger">
+                        <i class="fa-solid fa-trash"></i>
+                      </a>
+                    </td
                   </tr>
+                  
                   <?php } ?>
+                 
                 </tbody>
               </table>
             </div>
           </div>
-
+          
         </div>
         <!-- [ sample-page ] end -->
       </div>
@@ -396,7 +397,7 @@
   </footer>
 
   <!-- Required Js -->
-  <?php require_once('include/footer.php'); ?>
+  <?php require_once "include/footer.php"; ?>
 
   <div class="floting-button fixed bottom-[50px] right-[30px] z-[1030]">
   </div>

@@ -352,7 +352,7 @@
                       <?= $datos->nacionalidad; ?>
                     </td>
                     <td>
-                      <?= $datos->fecha_nacimiento; ?>
+                      <?= date("d-m-Y", strtotime($datos->fecha_nacimiento)); ?>
                     </td>
 
                     <td>

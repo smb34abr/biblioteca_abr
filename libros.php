@@ -329,7 +329,7 @@
                     <th>Escritor</th>
                     <th>Editorial</th>
                     <th>Existencia</th>
-                    <th>Precio</th>
+                    <th>Precio</th>                    
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -352,8 +352,18 @@
                     <td><?php echo $resultado["fecha_publicacion"]; ?></td>
                     <td><?php echo $resultado["nombre_escritor"] . " " .$resultado["apellido"]; ?></td>
                     <td><?php echo $resultado["nombre_editorial"]; ?></td>
-                    <td><?php echo $resultado["existencias"]; ?></td>
+                    <td>
+                      <?php
+                        if($resultado["existencias"] >= 1){
+                          echo "<span class='badge bg-success'>Disponible</span>";
+                        } else {
+                          echo "<span class='badge bg-danger'>Prestado</span>";
+                        }
+                      ?>
+                    </td>
+                    <!-- <td><?php //echo $resultado["existencias"]; ?></td> -->
                     <td><?php echo '$ '. $resultado["precio"] . ".00"; ?></td>
+                    
                     <td>
                       <a href="editar_libro.php?id_libro=<?php echo $resultado['id_libro'] ?>" class="btn btn-warning">
                         <i class="fa-solid fa-pencil"></i>
@@ -363,7 +373,9 @@
                       </a>
                     </td
                   </tr>
+                  
                   <?php } ?>
+                 
                 </tbody>
               </table>
             </div>
