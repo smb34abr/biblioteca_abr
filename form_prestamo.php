@@ -3,11 +3,13 @@
   data-pc-theme="light">
 
 <!-- [Head] start -->
+
 <head>
   <?php
   include_once "include/head.php";
   include_once "config/conexion.php";
   ?>
+
 </head>
 <!-- [Head] end -->
 
@@ -287,6 +289,8 @@
   </header>
   <!-- [ Header ] end -->
 
+
+
   <!-- [ Main Content ] start -->
   <div class="pc-container">
     <div class="pc-content">
@@ -294,12 +298,14 @@
       <div class="page-header">
         <div class="page-block">
           <div class="page-header-title">
-           
+            <a href="">
+              <!-- <h4 class="mb-0 font-medium mb-3" title="Nuevo escritor"> <i data-feather="plus"></i></h4> -->
+            </a>
           </div>
           <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.php">Incio</a></li>
+            <li class="breadcrumb-item"><a href="libros.php">Incio</a></li>
             <!-- <li class="breadcrumb-item"><a href="javascript: void(0)">Other</a></li> -->
-            <li class="breadcrumb-item" aria-current="page">Libros prestados</li>
+            <li class="breadcrumb-item" aria-current="page">Nuevo prestamo</li>
           </ul>
         </div>
       </div>
@@ -312,63 +318,64 @@
         <!-- [ sample-page ] start -->
         <div class="col-span-12">
           <div class="card">
-            <div class="card-header flex justify-between items-center">
-              <h3>Relación de Libros prestados</h3>
-              <a href="form_libros.php" class="btn bg-primary-700 me-2">
-                <h4 class="mb-0 font-medium" title="Nuevo libro" style="color: white;">Nuevo</h4>
-              </a>
+            <div class="card-header">
+              <h3>Formulario de prestamo</h3>
             </div>
             <div class="card-body">
-              <table id="example" class="display">
-                <thead>
-                  <tr>
-                    <th>id</th>
-                    <th>Libro</th>
-                    <th>Usuarios</th>
-                    <th>Fecha prestamo</th>
-                    <th>Fecha devolución</th>
-                    <th>Fecha devolucion prevista</th>
-                    <th>Fecha devolucion real</th>                                                      
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
 
-                  <?php
-                 
-                  $sql = $conexion->query("
-                    SELECT * FROM prestamos
-                    INNER JOIN libros ON prestamos.id_libro = libros.id_libro
-                    INNER JOIN usuarios ON prestamos.id_usuario = usuarios.id_usuario");
+              <form action="insert_prestamo.php" method="POST"> <!--insert_escritor.php-->
 
-                  while ($resultado = $sql->fetch_assoc()) { ?>
+                <div class="form-group">
+                  <label for="id_libro">Nombre del libro a prestar</label>
+                  <select name="id_libro" id="id_libro" class="form-control form-select">
+                    <option disabled>-- Selecciona un libro --</option>
+                    <?php
+                    require_once "config/conexion.php";
 
-                  <tr>
-                    <td><?php echo $resultado["id_prestamo"]; ?></td>
-                    <td><?php echo $resultado["titulo"]; ?></td>
-                    <td><?php echo $resultado["nombre"]. " ". $resultado["apellido"]; ?></td>
-                    <td><?php echo  date("d-m-Y", strtotime($resultado["fecha_prestamo"])); ?></td>
-                    <td><?php echo date("d-m-Y", strtotime($resultado["fecha_devolucion_prevista"])); ?></td>
-                    <td><?php echo date("d-m-Y", strtotime($resultado["fecha_devolucion_prevista"])); ?></td>
-                    <td><?php echo date("d-m-Y", strtotime($resultado["fecha_devolucion_real"])); ?></td>                    
-                    
-                    <td>
-                      <a href="editar_libro.php?id_libro=<?php echo $resultado['id_libro'] ?>" class="btn btn-warning">
-                        <i class="fa-solid fa-pencil"></i>
-                      </a>
-                      <a href="delete_libros.php?id_libro=<?php echo $resultado['id_libro'] ?>" class="btn btn-danger">
-                        <i class="fa-solid fa-trash"></i>
-                      </a>
-                    </td
-                  </tr>
-                  
-                  <?php } ?>
-                 
-                </tbody>
-              </table>
+                    $sql = $conexion->query("SELECT * FROM libros order by titulo ASC");
+                    while ($row = $sql->fetch_assoc()) {
+                      echo '<option value="' . $row['id'] . '">' . $row['titulo'] . '</option>';
+                    }
+                    ?>
+                  </select>
+                </div>
+
+                <div class="form-group mt-3">
+                  <label for="id_usuario">Nombre del usuario</label>
+                  <select name="id_usuario" id="id_usuaario" class="form-control form-select">
+                    <option disabled>-- Selecciona un usuario --</option>
+                    <?php                  
+
+                    $sql = $conexion->query("SELECT * FROM usuarios order by nombre ASC");
+                    while ($row = $sql->fetch_assoc()) {
+                      echo '<option value="' . $row['id'] . '">' . $row['nombre'] . " ". $row['apellido'] .'</option>';
+                    }
+                    ?>
+                  </select>
+                </div>
+                
+                <div class="form-group mt-3">
+                  <label for="fecha_prestamo">Fecha de préstamo</label>
+                  <input type="date" name="fecha_prestamo" id="fecha_prestamo" class="form-control" required>
+                </div>
+
+                <div class="form-group mt-3">
+                  <label for="fecha_devolucion">Fecha de devolución</label>
+                  <input type="date" name="fecha_devolucion" id="fecha_devolucion" class="form-control" required>
+                </div>
+
+                 <div class="form-group mt-3">
+                  <label for="fecha_devolucion_real">Fecha devolución real</label>
+                  <input type="date" name="fecha_devolucion_real" id="fecha_devolucion_real" class="form-control" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+                <a href="prestamo.php" class="btn btn-secondary mt-3">Cancelar</a>
+
+              </form>
             </div>
           </div>
-          
+
         </div>
         <!-- [ sample-page ] end -->
       </div>
@@ -433,6 +440,15 @@
     main_layout_change('vertical');
   </script>
 
+  <script>
+    function datoGuardado() {
+      Swal.fire({
+        title: "Datos guardados correctamente",
+        icon: "success",
+        draggable: true
+      });
+    }
+  </script>
 
 
 </body>

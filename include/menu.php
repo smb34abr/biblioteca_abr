@@ -63,7 +63,7 @@
 
 
         <li class="pc-item">
-          <a href="prestamos.php" class="pc-link">
+          <a href="prestamo.php" class="pc-link">
             <span class="pc-micon">
               <i data-feather="repeat"></i>
             </span>
