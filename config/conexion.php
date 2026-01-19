@@ -1,8 +1,8 @@
 <?php
-$hostname = "192.168.0.100";
-$username =  "abernal";
-$password =  "cThoa#nou4";
-$dbname = "biblioteca";
+$hostname = "localhost"; // "192.168.0.100";
+$username = "root"; //"abernal";
+$password = ""; //"cThoa#nou4";
+$dbname = "biblioteca"; //"biblioteca";
 
 $conexion = new mysqli($hostname, $username, $password, $dbname);
 
