@@ -335,8 +335,7 @@
                 </thead>
                 <tbody>
 
-                  <?php
-                  //require_once('config/conexion.php');
+                  <?php                  
 
                   $sql = $conexion->query("SELECT * FROM libros
 						            INNER JOIN escritores ON libros.id_escritor = escritores.id_escritor
