@@ -351,7 +351,7 @@
                   <tr>
                     <td><?php echo $resultado['id_usuario']; ?></td>
                     <td><?php echo $resultado['nombre'].' '.$resultado['apellido']; ?></td>
-                    <td><?php echo date("d-m-Y", strtotime($resultado['fecha_nacimiento'])); ?></td>                    
+                    <td><?php echo date("d-m-Y", strtotime($resultado['fecha_nacimiento'])); ?></td>
                     <td><?php echo $resultado['email'] ?></td>
                     <td><?php echo $resultado['telefono'] ?></td>
                     <td><?php echo $resultado['direccion'] ?></td>                    
