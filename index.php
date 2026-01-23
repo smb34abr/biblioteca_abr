@@ -3,15 +3,17 @@
   data-pc-theme="light">
 
 <!-- [Head] start -->
+
 <head>
   <?php
-      include_once "include/head.php";
-      include_once "config/conexion.php";
-    ?>
+  include_once "include/head.php";
+  include_once "config/conexion.php";
+  ?>
 </head>
 <!-- [Head] end -->
 
 <!-- [Body] Start -->
+
 <body>
   <!-- [ Pre-loader ] start -->
   <div class="loader-bg fixed inset-0 bg-white dark:bg-themedark-cardbg z-[1034]">
@@ -125,7 +127,7 @@
                   <div class="card-body">
                     <div class="flex gap-4">
                       <div class="shrink-0">
-                        <img class="img-radius w-12 h-12 rounded-0" src="../assets/images/user/avatar-1.jpg"
+                        <img class="img-radius w-12 h-12 rounded-0" src="assets/images/user/avatar-1.jpg"
                           alt="Generic placeholder image" />
                       </div>
                       <div class="grow">
@@ -144,7 +146,7 @@
                   <div class="card-body">
                     <div class="flex gap-4">
                       <div class="shrink-0">
-                        <img class="img-radius w-12 h-12 rounded-0" src="../assets/images/user/avatar-2.jpg"
+                        <img class="img-radius w-12 h-12 rounded-0" src="assets/images/user/avatar-2.jpg"
                           alt="Generic placeholder image" />
                       </div>
                       <div class="grow">
@@ -160,7 +162,7 @@
                   <div class="card-body">
                     <div class="flex gap-4">
                       <div class="shrink-0">
-                        <img class="img-radius w-12 h-12 rounded-0" src="../assets/images/user/avatar-3.jpg"
+                        <img class="img-radius w-12 h-12 rounded-0" src="assets/images/user/avatar-3.jpg"
                           alt="Generic placeholder image" />
                       </div>
                       <div class="grow ms-3">
@@ -179,7 +181,7 @@
                   <div class="card-body">
                     <div class="flex gap-4">
                       <div class="shrink-0">
-                        <img class="img-radius w-12 h-12 rounded-0" src="../assets/images/user/avatar-4.jpg"
+                        <img class="img-radius w-12 h-12 rounded-0" src="assets/images/user/avatar-4.jpg"
                           alt="Generic placeholder image" />
                       </div>
                       <div class="grow ms-3">
@@ -199,7 +201,7 @@
                   <div class="card-body">
                     <div class="flex gap-4">
                       <div class="shrink-0">
-                        <img class="img-radius w-12 h-12 rounded-0" src="../assets/images/user/avatar-5.jpg"
+                        <img class="img-radius w-12 h-12 rounded-0" src="assets/images/user/avatar-5.jpg"
                           alt="Generic placeholder image" />
                       </div>
                       <div class="grow ms-3">
@@ -231,7 +233,7 @@
               <div class="dropdown-header flex items-center justify-between py-4 px-5 bg-primary-500">
                 <div class="flex mb-1 items-center">
                   <div class="shrink-0">
-                    <img src="../assets/images/user/avatar-2.jpg" alt="user-image" class="w-10 rounded-full" />
+                    <img src="assets/images/user/avatar-2.jpg" alt="user-image" class="w-10 rounded-full" />
                   </div>
                   <div class="grow ms-3">
                     <h6 class="mb-1 text-white">Carson Darrin 🖖</h6>
@@ -315,7 +317,11 @@
                 <h3 class="font-light flex items-center mb-0">
                   <!-- <i class="feather icon-arrow-up text-success-500 text-[30px] mr-1.5"></i> -->
                   $
-                  <?php $sql = $conexion->query("SELECT SUM(precio) FROM libros"); $resultado = $sql->fetch_assoc(); echo number_format($resultado['SUM(precio)']). '.00'; ?>
+                  <?php
+                  $sql = $conexion->query("SELECT SUM(precio) FROM libros");
+                  $resultado = $sql->fetch_assoc();
+                  echo number_format($resultado['SUM(precio)']) . '.00';
+                  ?>
                 </h3>
                 <!-- <p class="mb-0">67%</p> -->
               </div>
@@ -330,13 +336,17 @@
         <div class="col-span-12 xl:col-span-4 md:col-span-6">
           <div class="card">
             <div class="card-header !pb-0 !border-b-0">
-              <h4>Existencias de libros</h4>
+              <h4>Existencias</h4>
             </div>
             <div class="card-body">
               <div class="flex items-center justify-between gap-3 flex-wrap">
                 <h3 class="font-light flex items-center mb-0">
                   <!-- <i class="feather icon-arrow-down text-danger-500 text-[30px] mr-1.5"></i> -->
-                  <?php $sql = $conexion->query("SELECT SUM(existencias) FROM libros"); $resultado = $sql->fetch_assoc(); echo $resultado['SUM(existencias)']; ?>
+                  <?php
+                  $sql = $conexion->query("SELECT SUM(existencias) FROM libros");
+                  $resultado = $sql->fetch_assoc();
+                  echo $resultado['SUM(existencias)'] . ' libros';
+                  ?>
                 </h3>
                 <!-- <p class="mb-0">36%</p> -->
               </div>
@@ -357,7 +367,11 @@
               <div class="flex items-center justify-between gap-3 flex-wrap">
                 <h3 class="font-light flex items-center mb-0">
                   <!-- <i class="feather icon-arrow-up text-success-500 text-[30px] mr-1.5"></i> -->
-                  <?php $sql = $conexion->query("SELECT SUM(estado) FROM escritores"); $resultado = $sql->fetch_assoc(); echo $resultado['SUM(estado)']; ?>
+                  <?php
+                  $sql = $conexion->query("SELECT SUM(estado) FROM escritores");
+                  $resultado = $sql->fetch_assoc();
+                  echo $resultado['SUM(estado)'];
+                  ?>
                 </h3>
                 <!-- <p class="mb-0">80%</p> -->
               </div>
@@ -368,15 +382,15 @@
             </div>
           </div>
         </div>
-       
-          <div class="col-span-12 xl:col-span-12 md:col-span-12">
+
+        <div class="col-span-12 xl:col-span-12 md:col-span-12">
           <div class="card table-card">
             <div class="card-header">
-              <h4>Cumpleaños del mes de:  
-                <?php 
-                  $fecha = new DateTime();
-                  $formateador = new IntlDateFormatter('es_ES', IntlDateFormatter::NONE, IntlDateFormatter::NONE, null, null, 'MMMM');
-                  echo ucfirst($formateador->format($fecha));
+              <h4>Cumpleaños del mes de:
+                <?php
+                //$fecha = new DateTime();
+                //$formateador = new IntlDateFormatter('es_ES', IntlDateFormatter::NONE, IntlDateFormatter::NONE, null, null, 'MMMM');
+                //echo ucfirst($formateador->format($fecha));
                 ?>
               </h4>
             </div>
@@ -500,7 +514,7 @@
               </div>
             </div>
           </div>
-       
+
         </div>
 
       </div>
@@ -564,9 +578,6 @@
   <script>
     main_layout_change('vertical');
   </script>
-
-
-<!-- INSERT INTO `prestamos` (`id_prestamo`, `id_libro`, `id_usuario`, `fecha_prestamo`, `fecha_devolucion_prevista`, `fecha_devolucion_real`) VALUES (NULL, '3', '1', '2025-12-31', '2026-01-08', NULL); -->
 
 </body>
 <!-- [Body] end -->

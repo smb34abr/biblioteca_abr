@@ -6,8 +6,8 @@
 
 <head>
   <?php
-    include_once('include/head.php');
-    include_once('config/conexion.php');
+  include_once('include/head.php');
+  include_once('config/conexion.php');
   ?>
 </head>
 <!-- [Head] end -->
@@ -297,7 +297,7 @@
       <div class="page-header">
         <div class="page-block">
           <div class="page-header-title">
-           <!--  <a href="">
+            <!--  <a href="">
               <h4 class="mb-0 font-medium mb-3" title="Nuevo libro"> <i data-feather="plus"></i></h4>
             </a> -->
           </div>
@@ -333,35 +333,35 @@
                     <th>Fecha de nacimiento</th>
                     <th>Email</th>
                     <th>Telefono</th>
-                    <th>Dirección</th>                    
+                    <th>Dirección</th>
                     <th>Acciones</th>
                 </thead>
                 <tbody>
 
-                <?php
-					//require_once('config/conexion.php');
+                  <?php
+                  //require_once('config/conexion.php');
+                  
+                  $sql = $conexion->query("SELECT * FROM usuarios");
+                  /*INNER JOIN escritores ON libros.id_escritor = escritores.id_escritor
+                  INNER JOIN editorial ON libros.id_editorial  = editorial.id_editorial*/
 
-					$sql = $conexion->query("SELECT * FROM usuarios
-						            /*INNER JOIN escritores ON libros.id_escritor = escritores.id_escritor
-						            INNER JOIN editorial ON libros.id_editorial  = editorial.id_editorial*/
-					");
 
-					 while ($resultado =  $sql->fetch_assoc()){
-				?>                    
-                  <tr>
-                    <td><?php echo $resultado['id_usuario']; ?></td>
-                    <td><?php echo $resultado['nombre'].' '.$resultado['apellido']; ?></td>
-                    <td><?php echo date("d-m-Y", strtotime($resultado['fecha_nacimiento'])); ?></td>
-                    <td><?php echo $resultado['email'] ?></td>
-                    <td><?php echo $resultado['telefono'] ?></td>
-                    <td><?php echo $resultado['direccion'] ?></td>                    
-                    <td>
-                      <a href="editar_usuario.php?id_usuario=<?php echo $resultado['id_usuario'] ?>"
-                        class="btn btn-warning"><i class="fa-solid fa-pencil"></i></a>
-                      <a href="delete_usuario.php?id_usuario=<?php echo $resultado['id_usuario'] ?>"
-                        class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
-                    </td>                    
-                  </tr>
+                  while ($resultado = $sql->fetch_assoc()) {
+                    ?>
+                    <tr>
+                      <td><?php echo $resultado['id_usuario']; ?></td>
+                      <td><?php echo $resultado['nombre'] . ' ' . $resultado['apellido']; ?></td>
+                      <td><?php echo date("d-m-Y", strtotime($resultado['fecha_nacimiento'])); ?></td>
+                      <td><?php echo $resultado['email'] ?></td>
+                      <td><?php echo $resultado['telefono'] ?></td>
+                      <td><?php echo $resultado['direccion'] ?></td>
+                      <td>
+                        <a href="editar_usuario.php?id_usuario=<?php echo $resultado['id_usuario'] ?>"
+                          class="btn btn-warning"><i class="fa-solid fa-pencil"></i></a>
+                        <a href="delete_usuario.php?id_usuario=<?php echo $resultado['id_usuario'] ?>"
+                          class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                      </td>
+                    </tr>
                   <?php } ?>
                 </tbody>
               </table>
