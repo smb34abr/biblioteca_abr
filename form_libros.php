@@ -339,12 +339,11 @@
 
                 <div class="form-group">
                   <label for="id_escritor">Escritor</label>
+                  
                   <select name="id_escritor" id="id_escritor" class="form-control form-select">
                     <option disabled>--Selecciona un escritor--</option>
 
                     <?php
-                                require_once "config/conexion.php";
-
                                 $sql = $conexion->query(
                                     "SELECT * FROM escritores ORDER BY nombre_escritor ASC",
                                 );
@@ -367,7 +366,7 @@
 
                   <select name="id_editorial" id="id_editorial" class="form-control form-select">
                     <option disabled>--Selecciona una editorial--</option>
-                    <?php require_once "config/conexion.php"; ?>
+                    
                     <?php
                             $sql = $conexion->query(
                                 "SELECT * FROM editorial ORDER BY nombre_editorial ASC",

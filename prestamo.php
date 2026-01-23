@@ -3,6 +3,7 @@
   data-pc-theme="light">
 
 <!-- [Head] start -->
+
 <head>
   <?php
   include_once "include/head.php";
@@ -294,7 +295,7 @@
       <div class="page-header">
         <div class="page-block">
           <div class="page-header-title">
-           
+
           </div>
           <ul class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php">Incio</a></li>
@@ -327,15 +328,15 @@
                     <th>Usuarios</th>
                     <th>Fecha prestamo</th>
                     <th>Fecha devolución</th>
-                    <th>Fecha devolucion prevista</th>
-                    <th>Fecha devolucion real</th>                                                      
+                    <th>Fecha prevista</th>
+                    <th>Fecha capturada</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
 
                   <?php
-                 
+
                   $sql = $conexion->query("
                     SELECT * FROM prestamos
                     INNER JOIN libros ON prestamos.id_libro = libros.id_libro
@@ -343,32 +344,31 @@
 
                   while ($resultado = $sql->fetch_assoc()) { ?>
 
-                  <tr>
-                    <td><?php echo $resultado["id_prestamo"]; ?></td>
-                    <td><?php echo $resultado["titulo"]; ?></td>
-                    <td><?php echo $resultado["nombre"]. " ". $resultado["apellido"]; ?></td>
-                    <td><?php echo  date("d-m-Y", strtotime($resultado["fecha_prestamo"])); ?></td>
-                    <td><?php echo date("d-m-Y", strtotime($resultado["fecha_devolucion_prevista"])); ?></td>
-                    <td><?php echo date("d-m-Y", strtotime($resultado["fecha_devolucion_prevista"])); ?></td>
-                    <td><?php echo date("d-m-Y", strtotime($resultado["fecha_devolucion_real"])); ?></td>                    
-                    
-                    <td>
-                      <a href="editar_libro.php?id_libro=<?php echo $resultado['id_libro'] ?>" class="btn btn-warning">
-                        <i class="fa-solid fa-pencil"></i>
-                      </a>
-                      <a href="delete_libros.php?id_libro=<?php echo $resultado['id_libro'] ?>" class="btn btn-danger">
-                        <i class="fa-solid fa-trash"></i>
-                      </a>
-                    </td
-                  </tr>
-                  
-                  <?php } ?>
-                 
+                    <tr>
+                      <td><?php echo $resultado["id_prestamo"]; ?></td>
+                      <td><?php echo $resultado["titulo"]; ?></td>
+                      <td><?php echo $resultado["nombre"] . " " . $resultado["apellido"]; ?></td>
+                      <td><?php echo date("d-m-Y", strtotime($resultado["fecha_prestamo"])); ?></td>
+                      <td><?php echo date("d-m-Y", strtotime($resultado["fecha_devolucion_prevista"])); ?></td>
+                      <td><?php echo date("d-m-Y", strtotime($resultado["fecha_devolucion_prevista"])); ?></td>
+                      <td><?php echo date("d-m-Y - h:i:s", strtotime($resultado["fecha_capturada"])); ?></td>
+
+                      <td>
+                        <a href="editar_libro.php?id_libro=<?php echo $resultado['id_libro'] ?>" class="btn btn-warning">
+                          <i class="fa-solid fa-pencil"></i>
+                        </a>
+                        <a href="delete_libros.php?id_libro=<?php echo $resultado['id_libro'] ?>" class="btn btn-danger">
+                          <i class="fa-solid fa-trash"></i>
+                        </a>
+                      </td </tr>
+
+                    <?php } ?>
+
                 </tbody>
               </table>
             </div>
           </div>
-          
+
         </div>
         <!-- [ sample-page ] end -->
       </div>

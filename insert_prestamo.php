@@ -7,9 +7,8 @@
     $fecha_devolucion = $_POST["fecha_devolucion"]; 
     $fecha_devolucion_real = $_POST["fecha_devolucion_real"];
 
-    $sql = $conexion->query("INSERT INTO prestamos (id_libro, id_usuario, fecha_prestamo, fecha_devolucion_prevista, fecha_devolucion_real, fecha_captura)
+    $sql = $conexion->query("INSERT INTO prestamos (id_libro, id_usuario, fecha_prestamo, fecha_devolucion_prevista, fecha_devolucion_real, fecha_capturada)
                              VALUES ('$id_libro', '$id_usuario', '$fecha_prestamo', '$fecha_devolucion', '$fecha_devolucion_real', NOW())");
-
 
 
     if ($sql) { 

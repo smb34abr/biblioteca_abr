@@ -327,14 +327,14 @@
 
                 <div class="form-group">
                   <label for="id_libro">Nombre del libro a prestar</label>
+
                   <select name="id_libro" id="id_libro" class="form-control form-select">
                     <option disabled>-- Selecciona un libro --</option>
                     <?php
-                    require_once "config/conexion.php";
-
-                    $sql = $conexion->query("SELECT * FROM libros order by titulo ASC");
-                    while ($row = $sql->fetch_assoc()) {
-                      echo '<option value="' . $row['id'] . '">' . $row['titulo'] . '</option>';
+                    
+                    $sql = $conexion->query("SELECT * FROM libros ORDER BY titulo ASC");
+                    while ($resultado = $sql->fetch_assoc()) {
+                      echo '<option value="' . $resultado['id_libro'] . '">' . $resultado['titulo'] . '</option>';
                     }
                     ?>
                   </select>
@@ -346,9 +346,9 @@
                     <option disabled>-- Selecciona un usuario --</option>
                     <?php                  
 
-                    $sql = $conexion->query("SELECT * FROM usuarios order by nombre ASC");
-                    while ($row = $sql->fetch_assoc()) {
-                      echo '<option value="' . $row['id'] . '">' . $row['nombre'] . " ". $row['apellido'] .'</option>';
+                    $sql = $conexion->query("SELECT * FROM usuarios ORDER BY nombre ASC");
+                    while ($resultado = $sql->fetch_assoc()) {
+                      echo '<option value="' . $resultado['id_usuario'] . '">' . $resultado['nombre'] . " ". $resultado['apellido'] .'</option>';
                     }
                     ?>
                   </select>
